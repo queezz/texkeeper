@@ -6,7 +6,8 @@ It creates a minimal project scaffold, keeps the directory clean from LaTeX junk
 helps manage chapter files, and collects generated PDFs in one place — without
 getting in your way.
 
-This is not a build system. It’s a broom, a clipboard, and a notebook label.
+This is not a build system.  
+It’s a broom, a clipboard, and a notebook label.
 
 ---
 
@@ -20,12 +21,23 @@ This is not a build system. It’s a broom, a clipboard, and a notebook label.
 
 ---
 
+## Installation
+
+Clone `keeper` **into your project root** as `.keeper`:
+
+```bash
+git clone git@github.com:YOURNAME/keeper.git .keeper
+```
+
+No installation, no virtual environment, no PATH setup.
+
+---
+
 ## Project structure
 
 After initialization:
 
 ```
-
 .
 ├─ master.tex
 ├─ preamble.tex
@@ -34,27 +46,32 @@ After initialization:
 ├─ PDFs/
 └─ .keeper/
    ├─ __main__.py
-   └─__init__.py
+   ├─ __init__.py
+   └─ ...
 ```
+
+`.keeper/` is an external helper tool and is typically added to `.gitignore`.
 
 ---
 
 ## Usage
 
-Run everything from the project root:
+Run all commands **from the project root**:
 
 ```bash
-python  .keeper <command>
+python .keeper <command>
 ```
 
+---
 
-### Typical workflow
+## Typical workflow
 
 ```bash
-python -m keeper init
+python .keeper init
 latexmk master.tex
-python -m keeper clean
-python -m keeper pdf
+python .keeper clean
+python .keeper pdf
+python .keeper add-section 20-permeation-model "Permeation Model"
 ```
 
 ---
@@ -63,9 +80,9 @@ python -m keeper pdf
 
 ### `init`
 
-Initialize a new workspace.
+Initialize a new thinking workspace.
 
-Creates:
+Creates (if missing):
 
 * `chapters/`
 * `preamble.tex`
@@ -75,7 +92,7 @@ Creates:
 Safe to run multiple times — existing files are never overwritten.
 
 ```bash
-python -m keeper init
+python .keeper init
 ```
 
 ---
@@ -85,6 +102,7 @@ python -m keeper init
 Remove LaTeX temporary/build files recursively.
 
 Deletes common junk such as:
+
 `.aux`, `.log`, `.fls`, `.fdb_latexmk`, `.synctex.gz`, etc.
 
 ```bash
@@ -95,7 +113,7 @@ python .keeper clean
 
 ### `pdf`
 
-Copy all generated PDFs into `./PDFs`.
+Copy generated PDFs into `./PDFs`.
 
 * Searches project root and `chapters/`
 * Skips already archived PDFs by default
@@ -166,7 +184,6 @@ If you want those things, use a heavier tool.
 
 ---
 
-
 ## Why this exists
 
 I am lazy about tooling, not about writing.
@@ -179,7 +196,4 @@ Just files, Python, and LaTeX.
 
 This is not a recommendation.
 It’s a convenience.
-
-
----
 
