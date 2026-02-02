@@ -1,0 +1,141 @@
+% ============================================================
+% MARK: Engine
+% ============================================================
+
+\usepackage{iftex}
+\ifPDFTeX\else
+  \newcommand{\pdfshellescape}{0}
+\fi
+
+
+% ============================================================
+% MARK: Fonts
+% ============================================================
+
+\usepackage{newtxtext,newtxmath}
+\let\openbox\relax
+
+
+% ============================================================
+% MARK: Page layout
+% ============================================================
+
+\usepackage[marginparwidth=20mm, marginparsep=3mm]{geometry}
+\geometry{
+  a5paper,
+  left=15mm,
+  right=15mm,
+  top=20mm,
+  bottom=15mm,
+}
+
+\usepackage{setspace}
+\setstretch{1.1}
+\usepackage{parskip}
+\usepackage{indentfirst}
+
+
+% ============================================================
+% MARK: Section formatting
+% ============================================================
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\titleformat{\section}
+{\sffamily\bfseries\large}
+{\thesection}
+{1em}{}
+
+\titleformat{\subsection}
+{\sffamily\bfseries\normalsize}
+{\thesubsection}
+{1em}{}
+
+
+% ============================================================
+% MARK: Math
+% ============================================================
+
+\usepackage{amsmath, amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{bigints}
+\usepackage{nicefrac}
+\usepackage{esvect}
+\usepackage{gensymb}
+
+\let\conjugatet\overline
+
+
+% ============================================================
+% MARK: Figures & drawing
+% ============================================================
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tikz}
+
+
+% ============================================================
+% MARK: Color & boxes
+% ============================================================
+
+\usepackage{xcolor,soul}
+\sethlcolor{yellow}
+
+\usepackage{marginnote}
+\usepackage[framemethod=default]{mdframed}
+
+\global\mdfdefinestyle{exampledefault}{%
+  linecolor=gray,
+  backgroundcolor=gray!5,
+  linewidth=0.5pt,
+  leftline=true,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  innerleftmargin=1em,
+  skipabove=1em,
+}
+
+\newenvironment{graybox}[1]{%
+  \mdfsetup{frametitle={#1}}%
+  \begin{mdframed}[style=exampledefault]
+}{\end{mdframed}}
+
+
+% ============================================================
+% MARK: Header API
+% ============================================================
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\setlength{\headheight}{10pt}
+\setlength{\headwidth}{\textwidth}
+
+\fancyhead[R]{\sffamily\small\thepage}
+\fancyhead[L]{\sffamily\small}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Public API
+\newcommand{\setheader}[1]{%
+  \fancyhead[L]{\sffamily\small #1}%
+}
+
+
+% ============================================================
+% MARK: Hyperlinks
+% ============================================================
+
+\usepackage[
+  bookmarksnumbered=true,
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+]{hyperref}
