@@ -1,7 +1,7 @@
 from importlib.resources import files
 from pathlib import Path
 
-from keeper.paths import CHAPTERS_DIR, FIRST_CHAPTER, MASTER, PREAMBLE
+from keeper.paths import CHAPTERS_DIR, MASTER, PREAMBLE
 
 
 def _read_asset_text(asset_name: str) -> str:
@@ -36,6 +36,4 @@ def run():
 
     _write_if_missing(PREAMBLE, preamble_text)
     _write_if_missing(MASTER, master_text)
-    _write_if_missing(FIRST_CHAPTER, "")
-
     print("Workspace initialized.")
