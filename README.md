@@ -26,7 +26,7 @@ It’s a broom, a clipboard, and a notebook label.
 Clone `keeper` **into your project root** as `.keeper`:
 
 ```bash
-git clone git@github.com:queezz/texkeeper.git .keeper
+git clone https://github.com/queezz/texkeeper.git .keeper
 ```
 
 No installation, no virtual environment, no PATH setup.
