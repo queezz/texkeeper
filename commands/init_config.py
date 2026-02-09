@@ -6,25 +6,23 @@ from keeper.config import CONFIG_FILE
 DEFAULT_CONFIG = """[watch]
 paths = [
   ".",
-  "sections",
-  "figures"
 ]
 
 [pdf]
 # Copy master PDF if it exists
-copy_master = true
-master_source = "build/master.pdf"
+copy_master = false
+master_source = "master.pdf"
 
 # Copy PDFs from folders
 copy_from_folders = true
 folder_paths = [
-  "chapters"
+  "."
 ]
-recursive = true
+recursive = false
 
 # Copy destinations
 copy_to = [
-  "../exports",
+  "./PDFs",
   # "/absolute/path/if/user/wants"
 ]
 """
