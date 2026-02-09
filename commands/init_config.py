@@ -11,7 +11,18 @@ paths = [
 ]
 
 [pdf]
-source = "build/master.pdf"
+# Copy master PDF if it exists
+copy_master = true
+master_source = "build/master.pdf"
+
+# Copy PDFs from folders
+copy_from_folders = true
+folder_paths = [
+  "chapters"
+]
+recursive = true
+
+# Copy destinations
 copy_to = [
   "../exports",
   # "/absolute/path/if/user/wants"

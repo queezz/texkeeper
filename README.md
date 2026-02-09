@@ -180,7 +180,7 @@ python .keeper clean
 Copy generated PDFs to configured destinations.
 
 **Without config** (default behavior):
-* Searches project root and `chapters/` for PDFs
+* Searches project root and `chapters/` for PDFs recursively
 * Copies them to `./PDFs`
 * Skips already archived PDFs by default
 
@@ -189,7 +189,8 @@ python .keeper pdf
 ```
 
 **With config** (`texkeeper.toml`):
-* Copies from configured `source` path
+* Optionally copies master PDF if it exists
+* Optionally copies PDFs from configured folders
 * Copies to all configured `copy_to` destinations
 * Creates destination folders if needed
 
@@ -207,12 +208,32 @@ python .keeper pdf --overwrite
 
 ```toml
 [pdf]
-source = "build/master.pdf"
+# Copy master PDF if it exists
+copy_master = true
+master_source = "build/master.pdf"
+
+# Copy PDFs from folders
+copy_from_folders = true
+folder_paths = [
+  "chapters",
+  "sections"
+]
+recursive = true
+
+# Copy destinations
 copy_to = [
   "../exports",
-  "/absolute/path/if/user/wants"
+  # "/absolute/path/if/user/wants"
 ]
 ```
+
+**Configuration options:**
+* `copy_master` (boolean): Whether to copy the master PDF
+* `master_source` (string): Path to master PDF (relative to project root or absolute)
+* `copy_from_folders` (boolean): Whether to copy PDFs from folders
+* `folder_paths` (list): Folders to search for PDFs
+* `recursive` (boolean): Whether to search folders recursively
+* `copy_to` (list): Destination folders for copied PDFs
 
 ---
 
