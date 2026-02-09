@@ -15,7 +15,7 @@ It’s a broom, a clipboard, and a notebook label.
 
 - One file, one purpose
 - Safe to re-run (no silent overwrites)
-- No magic state, no config files
+- Optional project-local config (not required)
 - You still run `latexmk` yourself
 - Optimized for long-lived, messy thinking projects
 
@@ -44,6 +44,7 @@ After initialization:
 ├─ chapters/
 │  └─ 10-chapter.tex
 ├─ PDFs/
+├─ texkeeper.toml  (optional, for project-local config)
 └─ .keeper/
    ├─ __main__.py
    ├─ __init__.py
@@ -97,6 +98,69 @@ python .keeper init
 
 ---
 
+### `init-config`
+
+Generate a default `texkeeper.toml` configuration file in the project root.
+
+This file allows you to configure:
+* Which paths to watch for file changes
+* PDF source location and copy destinations
+
+Safe to re-run — existing config files are never overwritten.
+
+```bash
+python .keeper init-config
+```
+
+This creates `texkeeper.toml` with example configuration. Edit it to customize watch paths and PDF behavior.
+
+---
+
+### `watch`
+
+Watch configured paths for file changes.
+
+Uses paths from `texkeeper.toml` `[watch]` section, or defaults to watching the current directory (`.`) if no config exists.
+
+**Example usage:**
+
+```bash
+# Start watching (uses config if texkeeper.toml exists, otherwise watches ".")
+python .keeper watch
+```
+
+The watch command will:
+* Display which paths are being watched
+* Monitor files for changes
+* Print notifications when files are modified
+* Run until interrupted with Ctrl+C
+
+**Example output:**
+
+```
+Watching 3 path(s):
+  .
+  sections
+  figures
+
+Monitoring for changes (Ctrl+C to stop)...
+Changed: sections/01-intro.tex
+Changed: figures/diagram.pdf
+```
+
+**Configuration example** (`texkeeper.toml`):
+
+```toml
+[watch]
+paths = [
+  ".",
+  "sections",
+  "figures"
+]
+```
+
+---
+
 ### `clean`
 
 Remove LaTeX temporary/build files recursively.
@@ -113,19 +177,41 @@ python .keeper clean
 
 ### `pdf`
 
-Copy generated PDFs into `./PDFs`.
+Copy generated PDFs to configured destinations.
 
-* Searches project root and `chapters/`
+**Without config** (default behavior):
+* Searches project root and `chapters/` for PDFs
+* Copies them to `./PDFs`
 * Skips already archived PDFs by default
 
 ```bash
 python .keeper pdf
 ```
 
-Overwrite existing archives:
+**With config** (`texkeeper.toml`):
+* Copies from configured `source` path
+* Copies to all configured `copy_to` destinations
+* Creates destination folders if needed
+
+```bash
+python .keeper pdf
+```
+
+Overwrite existing PDFs:
 
 ```bash
 python .keeper pdf --overwrite
+```
+
+**Configuration example** (`texkeeper.toml`):
+
+```toml
+[pdf]
+source = "build/master.pdf"
+copy_to = [
+  "../exports",
+  "/absolute/path/if/user/wants"
+]
 ```
 
 ---
@@ -164,7 +250,7 @@ python .keeper help
 
 ## Requirements
 
-* Python 3.10+
+* Python 3.11+ (for `tomllib` support in config)
 * No external dependencies
 * LaTeX toolchain (`latexmk`, etc.) is assumed but not managed
 

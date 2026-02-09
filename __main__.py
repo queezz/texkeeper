@@ -22,7 +22,7 @@ def _bootstrap_package():
 
 def main():
     _bootstrap_package()
-    from keeper.commands import add_section, clean, init, pdf
+    from keeper.commands import add_section, clean, init, init_config, pdf, watch
 
     parser = argparse.ArgumentParser(
         prog="keeper.py",
@@ -51,9 +51,21 @@ def main():
     )
 
     sub.add_parser(
+        "init-config",
+        help="generate default texkeeper.toml configuration file",
+        description=init_config.run.__doc__,
+    )
+
+    sub.add_parser(
         "clean",
         help="remove LaTeX temporary files",
         description=clean.run.__doc__,
+    )
+
+    sub.add_parser(
+        "watch",
+        help="watch configured paths for file changes",
+        description=watch.run.__doc__,
     )
 
     pdf_parser = sub.add_parser(
@@ -89,8 +101,12 @@ def main():
 
     if args.cmd == "init":
         init.run()
+    elif args.cmd == "init-config":
+        init_config.run()
     elif args.cmd == "clean":
         clean.run()
+    elif args.cmd == "watch":
+        watch.run()
     elif args.cmd == "pdf":
         pdf.run(args.overwrite)
     elif args.cmd == "add-section":
