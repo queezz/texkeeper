@@ -11,6 +11,21 @@ It’s a broom, a clipboard, and a notebook label.
 
 ---
 
+## Contents
+
+- [Philosophy](#philosophy)
+- [Installation](#installation)
+- [Project structure](#project-structure)
+- [Usage](#usage)
+- [Typical workflow](#typical-workflow)
+- [Commands](#commands)
+- [Requirements](#requirements)
+- [Non-goals](#non-goals)
+- [Why this exists](#why-this-exists)
+- [LaTeX preamble helpers](#latex-preamble-boxes-and-commands)
+
+---
+
 ## Philosophy
 
 - One file, one purpose
