@@ -7,6 +7,7 @@
   \newcommand{\pdfshellescape}{0}
 \fi
 
+\usepackage{needspace}
 \usepackage{subfiles}
 
 % ============================================================
@@ -84,6 +85,7 @@
 
 \usepackage{xcolor,soul}
 \sethlcolor{yellow}
+\definecolor{myblue}{HTML}{77c1e0}
 
 \usepackage{marginnote}
 \usepackage[framemethod=default]{mdframed}
@@ -104,6 +106,53 @@
   \mdfsetup{frametitle={#1}}%
   \begin{mdframed}[style=exampledefault]
 }{\end{mdframed}}
+
+% Simple gray box, no title
+\global\mdfdefinestyle{simplegray}{%
+  linecolor=gray,
+  backgroundcolor=gray!5,
+  linewidth=0.5pt,
+  innerleftmargin=1em,
+  innerrightmargin=1em,
+  innertopmargin=0.6em,
+  innerbottommargin=0.6em,
+  skipabove=0.8em,
+  skipbelow=0.8em,
+  nobreak=true,
+}
+\newenvironment{simplegraybox}{\begin{mdframed}[style=simplegray]}{\end{mdframed}}
+
+% Blue highlight box for final answers / solutions
+\global\mdfdefinestyle{solutionblue}{%
+  linecolor=myblue,
+  backgroundcolor=myblue!6,
+  frametitlebackgroundcolor=myblue!15,
+  linewidth=0.8pt,
+  roundcorner=4pt,
+  topline=true,
+  bottomline=true,
+  rightline=true,
+  leftline=true,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  innerleftmargin=1em,
+  innerrightmargin=1em,
+  innertopmargin=0.8em,
+  innerbottommargin=0.8em,
+  skipabove=1.0em,
+  skipbelow=1.0em,
+  frametitlefont=\sffamily\bfseries,
+  frametitlealignment=\raggedright,
+  nobreak=true,
+}
+\newenvironment{bluebox}[1]{%
+  \mdfsetup{%
+    frametitle={\colorbox{myblue!15}{\,#1\,}},
+    frametitleaboveskip=-\ht\strutbox,
+    frametitlealignment=\raggedright
+  }%
+  \begin{mdframed}[style=solutionblue]
+    }{\end{mdframed}}
 
 
 % ============================================================

@@ -304,3 +304,20 @@ Just files, Python, and LaTeX.
 This is not a recommendation.
 It’s a convenience.
 
+---
+
+## LaTeX preamble: boxes and commands
+
+The default `preamble.tex` scaffolded by `keeper` ships with a few quality‑of‑life helpers:
+
+- **Box environments**
+  - **`graybox{<title>}`**: Framed block with a left rule and a title bar, good for highlighted notes or definitions.
+  - **`simplegraybox`**: Simple, untitled gray box for short remarks or inline derivations.
+  - **`bluebox{<title>}`**: Blue framed box with a tinted title ribbon, intended for final answers / key results.
+
+- **Header helper**
+  - **`\setheader{<text>}`**: Sets the left side of the running header (right side always shows the page number).
+
+- **Math convenience**
+  - **`\conjugatet{z}`**: Alias for `\overline{z}` (complex conjugate), exposed so you can use a consistent notation and swap implementations later if needed.
+
